@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SimplePage } from "@/components/simple-page";
-import { site } from "@/lib/site-config";
+import { imageCredits, site } from "@/lib/site-config";
 import { basePath } from "@/lib/base-path";
 
 export const metadata: Metadata = {
@@ -42,6 +42,20 @@ export default function Privacy() {
         To access, correct or delete the details you sent us, e-mail <a href={`mailto:${site.email}`}>{site.email}</a> or call{" "}
         {site.phone.display}.
       </p>
+
+      {/* Required attribution for the Creative Commons photos used on the taxi page. */}
+      <h2 id="photo-credits">Photo credits</h2>
+      <ul className="list-disc space-y-1 pl-5 text-base">
+        {imageCredits.map((c) => (
+          <li key={c.what}>
+            {c.what}: {c.author},{" "}
+            <a href={c.url} target="_blank" rel="noopener">
+              {c.license}
+            </a>
+          </li>
+        ))}
+        <li>Car photos are representative images of each model.</li>
+      </ul>
 
       <p>
         <Link href="/">Back to taxi services</Link>

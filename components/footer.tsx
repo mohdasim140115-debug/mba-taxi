@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cacheLife } from "next/cache";
-import { imageCredits, site, telLink, whatsappLink } from "@/lib/site-config";
+import { site, telLink, whatsappLink } from "@/lib/site-config";
 import { navItems } from "./header";
 
 const mainSiteLinks = [
@@ -9,13 +8,6 @@ const mainSiteLinks = [
   { href: `${site.mainSiteUrl}/about-us/`, label: "About us" },
   { href: `${site.mainSiteUrl}/goa-taxi-service-contact/`, label: "Contact" },
 ];
-
-/** Captured into the static shell and refreshed weekly (Cache Components disallows a bare `new Date()`). */
-async function CopyrightYear() {
-  "use cache";
-  cacheLife("weeks");
-  return <>{new Date().getFullYear()}</>;
-}
 
 export function Footer() {
   return (
@@ -88,31 +80,25 @@ export function Footer() {
             </li>
             <li>
               <Link href="/privacy" className="hover:text-white hover:underline">
-                Privacy notice
+                Privacy &amp; photo credits
               </Link>
             </li>
           </ul>
         </nav>
       </div>
 
-      <div className="container-x mt-14 border-t border-white/10 pt-6 text-xs text-ivory/60">
+      <div className="container-x mt-14 border-t border-white/10 pt-6 text-center text-xs text-ivory/60">
         <p>
-          © <CopyrightYear /> {site.name}. Fares shown are as published by {site.name} and are confirmed for your route before
-          booking.
+          Prepared by{" "}
+          <a
+            href="https://deenxconsultancy.com/"
+            target="_blank"
+            rel="noopener"
+            className="font-semibold text-ivory hover:text-marigold hover:underline"
+          >
+            Deenx Consultancy
+          </a>
         </p>
-        <details className="mt-3">
-          <summary className="cursor-pointer hover:text-ivory">Photo credits</summary>
-          <ul className="mt-2 space-y-1">
-            {imageCredits.map((c) => (
-              <li key={c.what}>
-                {c.what}: {c.author},{" "}
-                <a href={c.url} target="_blank" rel="noopener" className="underline">
-                  {c.license}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </details>
       </div>
     </footer>
   );
