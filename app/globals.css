@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+/*
+ * MBA Travels Goa — design tokens
+ * Clean taxi theme: white surfaces, taxi yellow for actions and highlights,
+ * near-black text and dark sections, dark gold for small accent text
+ * (token names kept from the first palette: marigold = yellow, sea = gold).
+ */
+@theme {
+  --color-ink: #111418;
+  --color-ink-2: #1c2026;
+  --color-ink-3: #2b3038;
+  --color-ivory: #f6f6f3;
+  --color-paper: #ffffff;
+  --color-sand: #fff4c7;
+  --color-line: rgb(17 20 24 / 0.1);
+  --color-muted: #5b6170;
+  --color-marigold: #fbc200;
+  --color-marigold-deep: #e6b200;
+  --color-sea: #946500;
+  --color-whatsapp: #0e7c42;
+
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
+  --shadow-soft: 0 1px 2px rgb(17 20 24 / 0.04), 0 10px 30px -14px rgb(17 20 24 / 0.18);
+  --shadow-lift: 0 2px 6px rgb(17 20 24 / 0.06), 0 30px 60px -24px rgb(17 20 24 / 0.32);
+
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background: var(--color-marigold);
+    color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-x {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-x {
+      padding-inline: 2rem;
+    }
+  }
+
+  .display {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+    font-weight: 800;
+  }
+  .display em {
+    font-style: normal;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-sea);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    border-radius: 0.75rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1;
+    white-space: nowrap;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    background: var(--color-marigold);
+    color: var(--color-ink);
+    box-shadow: 0 8px 20px -10px rgb(251 194 0 / 0.9);
+  }
+  .btn-primary:hover {
+    background: var(--color-marigold-deep);
+  }
+  .btn-dark {
+    background: var(--color-ink);
+    color: var(--color-ivory);
+  }
+  .btn-dark:hover {
+    background: var(--color-ink-3);
+  }
+  .btn-ghost {
+    border: 1px solid var(--color-line);
+    color: var(--color-ink);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-ink);
+  }
+  .btn-light {
+    border: 1px solid rgb(255 255 255 / 0.35);
+    color: #fff;
+    background: rgb(255 255 255 / 0.06);
+  }
+  .btn-light:hover {
+    background: rgb(255 255 255 / 0.14);
+    border-color: rgb(255 255 255 / 0.6);
+  }
+  .btn-whatsapp {
+    background: var(--color-whatsapp);
+    color: #fff;
+  }
+  .btn-whatsapp:hover {
+    background: #0a6535;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-bottom: 0.35rem;
+  }
+  .field {
+    width: 100%;
+    height: 3rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgb(11 23 38 / 0.18);
+    background: #fff;
+    padding-inline: 0.9rem;
+    font-size: 1rem; /* 16px avoids iOS zoom on focus */
+    color: var(--color-ink);
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+  .field::placeholder {
+    color: #8a93a0;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--color-sea);
+    box-shadow: 0 0 0 3px rgb(13 103 103 / 0.18);
+  }
+  .field[aria-invalid="true"] {
+    border-color: #b42318;
+  }
+  .field-error {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #b42318;
+  }
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath stroke='%230b1726' stroke-width='1.6' d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.25rem;
+  }
+
+  /* Dotted "boarding pass" perforation, a nod to the live site's fleet cards. */
+  .perforation {
+    background-image: radial-gradient(circle, var(--color-line) 1.2px, transparent 1.4px);
+    background-size: 10px 2px;
+    background-repeat: repeat-x;
+    background-position: center;
+    height: 2px;
+  }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
